@@ -2,6 +2,7 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 import logging
+from pathlib import Path
 
 from backend.app.config import settings
 from backend.app.api.auth import router as auth_router
@@ -73,14 +74,32 @@ def health_check():
         "osint_mode": "live_web" if settings.SEARCH_API_KEY else "high_fidelity_demo"
     }
 
-@app.get("/")
-def root():
-    return {
-        "platform": settings.PROJECT_NAME,
-        "organization": settings.ORGANIZATION,
-        "docs_url": "/docs",
-        "health_check": "/api/health"
-    }
+# Serve Frontend SPA if built
+FRONTEND_DIST = Path(__file__).resolve().parent.parent.parent / "frontend" / "dist"
+
+if FRONTEND_DIST.exists() and (FRONTEND_DIST / "index.html").exists():
+    from fastapi.staticfiles import StaticFiles
+    from fastapi.responses import FileResponse
+
+    assets_dir = FRONTEND_DIST / "assets"
+    if assets_dir.exists():
+        app.mount("/assets", StaticFiles(directory=str(assets_dir)), name="assets")
+
+    @app.get("/{full_path:path}")
+    async def serve_spa(full_path: str):
+        file_path = FRONTEND_DIST / full_path
+        if full_path and file_path.is_file():
+            return FileResponse(file_path)
+        return FileResponse(FRONTEND_DIST / "index.html")
+else:
+    @app.get("/")
+    def root():
+        return {
+            "platform": settings.PROJECT_NAME,
+            "organization": settings.ORGANIZATION,
+            "docs_url": "/docs",
+            "health_check": "/api/health"
+        }
 
 if __name__ == "__main__":
     import uvicorn
