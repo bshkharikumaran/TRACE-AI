@@ -1,4 +1,4 @@
-# CRIMESHIELD AI
+# TRACE AI
 ### AI-Powered Criminal Network Intelligence & Investigation Assistance Platform
 
 **Smart India Hackathon (SIH 2026) — Problem Statement SIH 26189**  
@@ -9,7 +9,7 @@
 ## 1. Executive Summary & Core Innovation
 
 Traditional law enforcement analytics ask: *"Show me the criminal network."*  
-**CRIMESHIELD AI** asks:  
+**TRACE AI** asks:  
 > **"Show me how the network is changing, what new relationships are forming, why the pattern is suspicious, what evidence supports it, and what I should investigate next."**
 
 The platform unifies fragmented crime-related datasets:
