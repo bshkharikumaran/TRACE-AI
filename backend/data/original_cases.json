@@ -1,24 +1,5 @@
 {
-  "users": [
-    {
-      "id": "u-001",
-      "name": "Inspector Rajeshwari Devi",
-      "email": "rajeshwari.devi@ncrb.gov.in",
-      "role": "investigator",
-      "department": "Women Safety Division, NCRB",
-      "badge_number": "NCRB-INV-7741",
-      "created_at": "2026-09-10T15:09:32.922896+00:00"
-    },
-    {
-      "id": "u-002",
-      "name": "Sr. Analyst Sameer Sen",
-      "email": "sameer.sen@ncrb.gov.in",
-      "role": "analyst",
-      "department": "Cyber & Financial Intelligence Unit",
-      "badge_number": "NCRB-ANA-3302",
-      "created_at": "2026-09-10T15:09:32.922925+00:00"
-    }
-  ],
+  "users": [],
   "investigations": [
     {
       "id": "inv-orig-001",
@@ -29,210 +10,20 @@
       "priority": "High",
       "lead_investigator": "Inspector Rajeshwari Devi",
       "department": "NCRB Women Safety & Cyber Cell",
-      "created_at": "2026-09-18T05:50:54.978337+00:00",
+      "created_at": "2026-09-25T07:37:57.217967+00:00",
       "description": "High-value digital arrest & extortion syndicate operating across NCR and Mewat using compromised SIMs and mule accounts."
     }
   ],
-  "persons": [
-    {
-      "id": "p-orig-01",
-      "person_code": "P-ORIG-01",
-      "name": "Vikram @ Vicky",
-      "aliases": [
-        "Vicky Don",
-        "V-7"
-      ],
-      "role": "Syndicate Head / Mastermind",
-      "risk_score": 92,
-      "status": "Suspect",
-      "phone": "+91 98110 44219",
-      "location": "Noida Sector 62",
-      "active": true,
-      "created_at": "2026-09-18T05:50:54.978337+00:00"
-    },
-    {
-      "id": "p-orig-02",
-      "person_code": "P-ORIG-02",
-      "name": "Rohit Malhotra",
-      "aliases": [
-        "Cashier"
-      ],
-      "role": "Hawala Operator / Mule Recruiter",
-      "risk_score": 85,
-      "status": "Suspect",
-      "phone": "+91 98731 99201",
-      "location": "Laxmi Nagar, Delhi",
-      "active": true,
-      "created_at": "2026-09-18T05:50:54.978337+00:00"
-    },
-    {
-      "id": "p-orig-03",
-      "person_code": "P-ORIG-03",
-      "name": "Simran Kaur",
-      "aliases": [
-        "Operator 3"
-      ],
-      "role": "Tele-caller / Script Operator",
-      "risk_score": 68,
-      "status": "Person of Interest",
-      "phone": "+91 99102 33814",
-      "location": "Rohini Sector 9",
-      "active": true,
-      "created_at": "2026-09-18T05:50:54.978337+00:00"
-    },
-    {
-      "id": "p-orig-04",
-      "person_code": "P-ORIG-04",
-      "name": "Karan Chawla",
-      "aliases": [
-        "Technician"
-      ],
-      "role": "SIM Box Operator / Device Mule",
-      "risk_score": 74,
-      "status": "Suspect",
-      "phone": "+91 98109 55112",
-      "location": "Gurugram Phase 3",
-      "active": true,
-      "created_at": "2026-09-18T05:50:54.978337+00:00"
-    }
-  ],
-  "phone_numbers": [
-    {
-      "id": "ph-orig-01",
-      "phone_id": "PH-ORIG-01",
-      "number": "+91 98110 44219",
-      "imei": "864201049921820",
-      "subscriber_name": "Vikram Sharma (Forged ID)",
-      "provider": "Airtel",
-      "status": "Active",
-      "created_at": "2026-09-18T05:50:54.978337+00:00"
-    },
-    {
-      "id": "ph-orig-02",
-      "phone_id": "PH-ORIG-02",
-      "number": "+91 98731 99201",
-      "imei": "359128091823741",
-      "subscriber_name": "Rohit Malhotra",
-      "provider": "Jio",
-      "status": "Active",
-      "created_at": "2026-09-18T05:50:54.978337+00:00"
-    }
-  ],
+  "persons": [],
+  "phone_numbers": [],
   "vehicles": [],
   "locations": [],
   "organizations": [],
-  "bank_accounts": [
-    {
-      "id": "acc-orig-01",
-      "account_id": "ACC-ORIG-01",
-      "account_number": "91802004819201",
-      "bank_name": "HDFC Bank",
-      "holder_name": "Falcon Global Impex (Mule)",
-      "branch": "Nehru Place, Delhi",
-      "balance": "\u20b942,50,000",
-      "status": "Frozen by LEA",
-      "created_at": "2026-09-18T05:50:54.978337+00:00"
-    },
-    {
-      "id": "acc-orig-02",
-      "account_id": "ACC-ORIG-02",
-      "account_number": "60341011009823",
-      "bank_name": "ICICI Bank",
-      "holder_name": "Rohit Malhotra",
-      "branch": "Laxmi Nagar, Delhi",
-      "balance": "\u20b918,20,000",
-      "status": "Under Surveillance",
-      "created_at": "2026-09-18T05:50:54.978337+00:00"
-    }
-  ],
-  "firs": [
-    {
-      "id": "fir-orig-01",
-      "fir_number": "FIR-2026-DL-8819",
-      "investigation_id": "inv-orig-001",
-      "police_station": "Cyber PS Lodhi Colony, New Delhi",
-      "sections": "BNS 318(4), 316(2), 61(2) & IT Act 66D",
-      "date_filed": "2026-08-15",
-      "narrative": "Coordinated cyber extortion and digital arrest racket targeting victims with fraudulent police summons and siphon transfers to mule accounts.",
-      "created_at": "2026-09-18T05:50:54.978337+00:00"
-    }
-  ],
+  "bank_accounts": [],
+  "firs": [],
   "transactions": [],
   "communications": [],
-  "relationships": [
-    {
-      "id": "rel-orig-01",
-      "source": "p-orig-01",
-      "target": "p-orig-02",
-      "relationship_type": "Directs Financials",
-      "weight": 0.9,
-      "confidence": 0.95,
-      "created_at": "2026-09-18T05:50:54.978337+00:00"
-    },
-    {
-      "id": "rel-orig-02",
-      "source": "p-orig-01",
-      "target": "p-orig-03",
-      "relationship_type": "Supervises Calls",
-      "weight": 0.8,
-      "confidence": 0.9,
-      "created_at": "2026-09-18T05:50:54.978337+00:00"
-    },
-    {
-      "id": "rel-orig-03",
-      "source": "p-orig-01",
-      "target": "ph-orig-01",
-      "relationship_type": "Uses Device",
-      "weight": 1.0,
-      "confidence": 0.99,
-      "created_at": "2026-09-18T05:50:54.978337+00:00"
-    },
-    {
-      "id": "rel-orig-04",
-      "source": "p-orig-02",
-      "target": "ph-orig-02",
-      "relationship_type": "Uses Device",
-      "weight": 1.0,
-      "confidence": 0.99,
-      "created_at": "2026-09-18T05:50:54.978337+00:00"
-    },
-    {
-      "id": "rel-orig-05",
-      "source": "p-orig-02",
-      "target": "acc-orig-01",
-      "relationship_type": "Operates Mule Account",
-      "weight": 0.95,
-      "confidence": 0.94,
-      "created_at": "2026-09-18T05:50:54.978337+00:00"
-    },
-    {
-      "id": "rel-orig-06",
-      "source": "p-orig-02",
-      "target": "acc-orig-02",
-      "relationship_type": "Transfers Funds To",
-      "weight": 0.88,
-      "confidence": 0.92,
-      "created_at": "2026-09-18T05:50:54.978337+00:00"
-    },
-    {
-      "id": "rel-orig-07",
-      "source": "p-orig-04",
-      "target": "p-orig-01",
-      "relationship_type": "Supplies Cloned SIMs",
-      "weight": 0.85,
-      "confidence": 0.89,
-      "created_at": "2026-09-18T05:50:54.978337+00:00"
-    },
-    {
-      "id": "rel-orig-08",
-      "source": "p-orig-04",
-      "target": "ph-orig-01",
-      "relationship_type": "Activated SIM For",
-      "weight": 0.92,
-      "confidence": 0.95,
-      "created_at": "2026-09-18T05:50:54.978337+00:00"
-    }
-  ],
+  "relationships": [],
   "evidence": [
     {
       "id": "ev-orig-01",
@@ -244,8 +35,8 @@
       "file_path": "/vault/evidence/ev-orig-01.dat",
       "sha256_hash": "4a7261a868a8677c77f0203f8f2b704c7c598b04a44f9f7435f114c0a59a7a9d",
       "verification_status": "verified",
-      "verified_at": "2026-09-18T05:50:54.978337+00:00",
-      "created_at": "2026-09-18T05:50:54.978337+00:00"
+      "verified_at": "2026-09-25T07:37:57.217967+00:00",
+      "created_at": "2026-09-25T07:37:57.217967+00:00"
     }
   ],
   "alerts": [],
@@ -292,6 +83,48 @@
         "mode": "demo_search_mode"
       },
       "created_at": "2026-09-10T16:59:49.511931+00:00"
+    },
+    {
+      "id": "aud-1790319756785",
+      "user_id": "u-001",
+      "action": "CSV_DATA_IMPORT",
+      "entity_type": "batch_import",
+      "entity_id": "import_20260925_123236",
+      "timestamp": "2026-09-25T07:02:36.785140+00:00",
+      "metadata": {
+        "valid_records": 7,
+        "duplicates_filtered": 3,
+        "potential_matches": 6
+      },
+      "created_at": "2026-09-25T07:02:36.785180+00:00"
+    },
+    {
+      "id": "aud-1790321758720",
+      "user_id": "u-001",
+      "action": "CSV_DATA_IMPORT",
+      "entity_type": "batch_import",
+      "entity_id": "import_20260925_130558",
+      "timestamp": "2026-09-25T07:35:58.720484+00:00",
+      "metadata": {
+        "valid_records": 7,
+        "duplicates_filtered": 3,
+        "potential_matches": 6
+      },
+      "created_at": "2026-09-25T07:35:58.720519+00:00"
+    },
+    {
+      "id": "aud-1790322047592",
+      "user_id": "u-001",
+      "action": "DOCUMENT_ANALYSIS",
+      "entity_type": "document",
+      "entity_id": "wiretap_intercept_0824.wav",
+      "timestamp": "2026-09-25T07:40:47.592902+00:00",
+      "metadata": {
+        "model_used": "openai/gpt-oss-20b",
+        "is_transformer": true,
+        "file_size": 28
+      },
+      "created_at": "2026-09-25T07:40:47.592930+00:00"
     }
   ]
 }

@@ -38,6 +38,16 @@ export default {
           emerald: '#16a34a'
         }
       },
+      fontSize: {
+        '2xs': ['0.75rem', { lineHeight: '1rem' }],
+        'xs': ['0.85rem', { lineHeight: '1.25rem' }],
+        'sm': ['0.95rem', { lineHeight: '1.4rem' }],
+        'base': ['1.05rem', { lineHeight: '1.6rem' }],
+        'lg': ['1.2rem', { lineHeight: '1.75rem' }],
+        'xl': ['1.35rem', { lineHeight: '1.9rem' }],
+        '2xl': ['1.65rem', { lineHeight: '2.15rem' }],
+        '3xl': ['2rem', { lineHeight: '2.4rem' }],
+      },
       boxShadow: {
         'xs': '0 1px 2px 0 rgba(0, 0, 0, 0.04)',
         'card': '0 1px 3px 0 rgba(15, 23, 42, 0.05), 0 1px 2px -1px rgba(15, 23, 42, 0.04)',

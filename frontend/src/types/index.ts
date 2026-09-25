@@ -1,10 +1,13 @@
+export type UserRole = 'administrator' | 'investigator' | 'analyst' | 'auditor';
+
 export interface User {
   id: string;
   name: string;
   email: string;
-  role: 'investigator' | 'analyst' | 'administrator';
+  role: UserRole;
   department: string;
   badge_number?: string;
+  permissions?: string[];
 }
 
 export interface Investigation {

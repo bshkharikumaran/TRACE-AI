@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Upload, FileText, CheckCircle2, AlertCircle, X, ArrowRight, Table } from 'lucide-react';
+import { Upload, FileText, CheckCircle2, AlertCircle, X, ArrowRight, Table, FileSpreadsheet } from 'lucide-react';
 import { api } from '../../services/api';
 
 interface DataImportModalProps {
@@ -31,7 +31,7 @@ export const DataImportModal: React.FC<DataImportModalProps> = ({ isOpen, onClos
         setMappings(preview.suggested_mappings || {});
         setStep('mapping');
       } catch (err: any) {
-        setError(err.message || 'Failed to parse CSV preview');
+        setError(err.message || 'Failed to parse file preview');
       } finally {
         setLoading(false);
       }
@@ -58,24 +58,24 @@ export const DataImportModal: React.FC<DataImportModalProps> = ({ isOpen, onClos
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm">
-      <div className="bg-white border border-slate-200 rounded-xl max-w-2xl w-full p-6 shadow-2xl space-y-5 text-slate-800">
+      <div className="bg-white border border-slate-200 rounded-2xl max-w-2xl w-full p-6 shadow-2xl space-y-5 text-slate-800">
         <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600">
-              <Table className="w-4 h-4" />
+          <div className="flex items-center gap-2.5">
+            <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600">
+              <Table className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-bold text-slate-900 text-sm">Batch Data Ingestion Wizard</h3>
-              <p className="text-xs text-slate-500">Import authorized surveillance datasets & FIR logs</p>
+              <h3 className="font-bold text-slate-900 text-base">Batch Data Ingestion Wizard</h3>
+              <p className="text-xs text-slate-500">Import authorized surveillance datasets, call records & rosters</p>
             </div>
           </div>
-          <button onClick={onClose} className="p-1 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition">
+          <button onClick={onClose} className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition">
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {error && (
-          <div className="p-3 rounded-lg bg-red-50 border border-red-200 text-red-700 text-xs flex items-center gap-2">
+          <div className="p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm flex items-center gap-2">
             <AlertCircle className="w-4 h-4 flex-shrink-0" />
             <span>{error}</span>
           </div>
@@ -83,35 +83,40 @@ export const DataImportModal: React.FC<DataImportModalProps> = ({ isOpen, onClos
 
         {step === 'upload' && (
           <div className="space-y-4">
-            <label className="border-2 border-dashed border-slate-300 hover:border-blue-500 rounded-xl p-8 flex flex-col items-center justify-center gap-3 cursor-pointer bg-slate-50 hover:bg-blue-50/40 transition">
-              <Upload className="w-8 h-8 text-blue-600 animate-bounce" />
-              <div className="text-center">
-                <p className="font-semibold text-slate-800 text-sm">Select or drop investigation CSV file</p>
-                <p className="text-xs text-slate-500 mt-0.5">Supports suspect rosters, call records, vehicle sightings</p>
+            <label className="border-2 border-dashed border-slate-300 hover:border-blue-500 rounded-2xl p-8 flex flex-col items-center justify-center gap-3 cursor-pointer bg-slate-50 hover:bg-blue-50/40 transition">
+              <Upload className="w-10 h-10 text-blue-600 animate-bounce" />
+              <div className="text-center space-y-1">
+                <p className="font-bold text-slate-800 text-base">Select or drop investigation dataset file</p>
+                <p className="text-sm text-slate-600">
+                  Accepts all formats: <strong>CSV, TSV, JSON, TXT, LOG, XLSX</strong>
+                </p>
+                <p className="text-xs text-slate-400 mt-1">
+                  Supports CDR call logs, suspect rosters, vehicle sightings, and bank ledgers
+                </p>
               </div>
-              <input type="file" accept=".csv" onChange={handleFileChange} className="hidden" />
+              <input type="file" accept="*/*" onChange={handleFileChange} className="hidden" />
             </label>
           </div>
         )}
 
         {step === 'mapping' && previewData && (
           <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-semibold text-slate-700">
+            <div className="flex items-center justify-between text-sm">
+              <span className="font-semibold text-slate-700">
                 File: <strong className="font-mono text-blue-600">{previewData.filename}</strong> ({previewData.total_columns} columns)
               </span>
-              <span className="text-xs text-slate-500">Map CSV columns to TRACE-AI target fields</span>
+              <span className="text-xs text-slate-500">Map columns to TRACE-AI target attributes</span>
             </div>
 
-            <div className="max-h-60 overflow-y-auto space-y-2 border border-slate-200 rounded-lg p-3 bg-slate-50">
+            <div className="max-h-64 overflow-y-auto space-y-2 border border-slate-200 rounded-xl p-3.5 bg-slate-50">
               {previewData.headers.map((h: string) => (
-                <div key={h} className="flex items-center justify-between gap-4 text-xs">
-                  <span className="font-mono font-medium text-slate-700 truncate w-1/2">{h}</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
+                <div key={h} className="flex items-center justify-between gap-4 text-sm">
+                  <span className="font-mono font-medium text-slate-800 truncate w-1/2">{h}</span>
+                  <ArrowRight className="w-4 h-4 text-slate-400 flex-shrink-0" />
                   <select
                     value={mappings[h] || 'ignore'}
                     onChange={(e) => setMappings({ ...mappings, [h]: e.target.value })}
-                    className="w-1/2 px-2.5 py-1 bg-white border border-slate-300 rounded-md text-slate-800 text-xs focus:ring-1 focus:ring-blue-500"
+                    className="w-1/2 px-3 py-1.5 bg-white border border-slate-300 rounded-lg text-slate-800 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
                   >
                     <option value="ignore">-- Skip / Ignore --</option>
                     <option value="person_name">Person Name</option>
@@ -125,17 +130,17 @@ export const DataImportModal: React.FC<DataImportModalProps> = ({ isOpen, onClos
               ))}
             </div>
 
-            <div className="flex items-center justify-end gap-2 pt-2">
+            <div className="flex items-center justify-end gap-2.5 pt-2">
               <button
                 onClick={() => setStep('upload')}
-                className="px-3 py-1.5 rounded-lg border border-slate-300 text-slate-600 hover:bg-slate-100 text-xs font-medium transition"
+                className="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-100 text-sm font-semibold transition"
               >
                 Back
               </button>
               <button
                 onClick={handleExecuteImport}
                 disabled={loading}
-                className="px-4 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition shadow-sm"
+                className="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold transition shadow-sm cursor-pointer"
               >
                 {loading ? 'Importing...' : 'Confirm & Ingest Batch'}
               </button>
@@ -145,22 +150,22 @@ export const DataImportModal: React.FC<DataImportModalProps> = ({ isOpen, onClos
 
         {step === 'success' && importResult && (
           <div className="space-y-4 text-center py-4">
-            <div className="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
-              <CheckCircle2 className="w-6 h-6" />
+            <div className="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
+              <CheckCircle2 className="w-7 h-7" />
             </div>
             <div>
-              <h4 className="font-bold text-slate-900 text-base">Batch Ingestion Successful</h4>
-              <p className="text-xs text-slate-600 mt-1">{importResult.message}</p>
+              <h4 className="font-bold text-slate-900 text-lg">Batch Ingestion Successful</h4>
+              <p className="text-sm text-slate-600 mt-1">{importResult.message}</p>
             </div>
 
-            <div className="grid grid-cols-2 gap-3 max-w-sm mx-auto text-xs font-mono">
-              <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg">
-                <span className="text-slate-500 block text-[10px]">RECORDS INSERTED</span>
-                <span className="text-emerald-600 font-bold text-lg">+{importResult.valid_records_imported}</span>
+            <div className="grid grid-cols-2 gap-3 max-w-sm mx-auto text-sm font-mono">
+              <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+                <span className="text-slate-500 block text-2xs">RECORDS INSERTED</span>
+                <span className="text-emerald-600 font-bold text-xl">+{importResult.valid_records_imported}</span>
               </div>
-              <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg">
-                <span className="text-slate-500 block text-[10px]">DUPLICATES FILTERED</span>
-                <span className="text-slate-700 font-bold text-lg">{importResult.duplicates_skipped}</span>
+              <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+                <span className="text-slate-500 block text-2xs">DUPLICATES FILTERED</span>
+                <span className="text-slate-700 font-bold text-xl">{importResult.duplicates_skipped}</span>
               </div>
             </div>
 
@@ -169,7 +174,7 @@ export const DataImportModal: React.FC<DataImportModalProps> = ({ isOpen, onClos
                 onSuccess();
                 onClose();
               }}
-              className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-lg transition"
+              className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-xl transition cursor-pointer"
             >
               Done & View Active Graph
             </button>

@@ -17,22 +17,39 @@ router = APIRouter(prefix="/import", tags=["Data Import"])
 
 @router.post("/preview")
 async def preview_csv(file: UploadFile = File(...)):
-    """Parse uploaded CSV and return column headers and preview rows."""
+    """Parse uploaded tabular/structured file (CSV, TSV, JSON) and return column headers and preview rows."""
     contents = await file.read()
     filename = file.filename or "import.csv"
-    text = contents.decode("utf-8", errors="ignore")
+    text = contents.decode("utf-8", errors="ignore").strip()
 
-    reader = csv.DictReader(io.StringIO(text))
-    if not reader.fieldnames:
-        raise HTTPException(status_code=400, detail="CSV file must contain valid headers.")
-
-    headers = list(reader.fieldnames)
+    headers = []
     rows = []
-    for idx, row in enumerate(reader):
-        if idx < 10:
-            rows.append(row)
-        else:
-            break
+
+    # Check for JSON array
+    if text.startswith("[") or filename.lower().endswith(".json"):
+        import json
+        try:
+            parsed = json.loads(text)
+            if isinstance(parsed, list) and len(parsed) > 0 and isinstance(parsed[0], dict):
+                headers = list(parsed[0].keys())
+                rows = parsed[:10]
+        except Exception:
+            pass
+
+    # Fallback to CSV / TSV
+    if not headers:
+        delimiter = "\t" if "\t" in text.split("\n")[0] and "," not in text.split("\n")[0] else ","
+        reader = csv.DictReader(io.StringIO(text), delimiter=delimiter)
+        if reader.fieldnames:
+            headers = [h for h in reader.fieldnames if h]
+            for idx, row in enumerate(reader):
+                if idx < 10:
+                    rows.append(row)
+                else:
+                    break
+
+    if not headers:
+        raise HTTPException(status_code=400, detail="Could not detect headers or structured records in uploaded file.")
 
     # Suggested column mappings
     mapping_suggestions = {}

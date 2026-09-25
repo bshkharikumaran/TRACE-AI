@@ -56,6 +56,24 @@ class DualModeRepository:
                     "department": "Cyber & Financial Intelligence Unit",
                     "badge_number": "NCRB-ANA-3302",
                     "created_at": datetime.now(timezone.utc).isoformat()
+                },
+                {
+                    "id": "u-003",
+                    "name": "Deputy Director Alok Verma",
+                    "email": "alok.verma@ncrb.gov.in",
+                    "role": "administrator",
+                    "department": "Directorate of Operations, NCRB",
+                    "badge_number": "NCRB-ADM-1001",
+                    "created_at": datetime.now(timezone.utc).isoformat()
+                },
+                {
+                    "id": "u-004",
+                    "name": "Vigilance Officer K. Raman",
+                    "email": "k.raman@ncrb.gov.in",
+                    "role": "auditor",
+                    "department": "Internal Oversight & Compliance Division",
+                    "badge_number": "NCRB-AUD-5590",
+                    "created_at": datetime.now(timezone.utc).isoformat()
                 }
             ],
             "investigations": [],
@@ -332,8 +350,10 @@ class DualModeRepository:
         store = self.original_data if self.mode == "original" else self.mock_data
         if table_name not in store:
             store[table_name] = []
-        if "created_at" not in item:
+        if "created_at" not in item and table_name != "audit_logs":
             item["created_at"] = datetime.now(timezone.utc).isoformat()
+        if table_name == "audit_logs" and "timestamp" not in item:
+            item["timestamp"] = datetime.now(timezone.utc).isoformat()
             
         store[table_name].append(item)
         if self.mode == "original":
@@ -342,6 +362,8 @@ class DualModeRepository:
                 try:
                     # Clean payload for Postgres
                     clean_item = {k: v for k, v in item.items() if not isinstance(v, (dict, list)) or table_name in ["alerts", "osint_results", "audit_logs", "relationships"]}
+                    if table_name == "audit_logs":
+                        clean_item.pop("created_at", None)
                     self.supabase.table(table_name).insert(clean_item).execute()
                 except Exception as e:
                     logger.warning(f"Supabase insert error for {table_name}: {e}")
